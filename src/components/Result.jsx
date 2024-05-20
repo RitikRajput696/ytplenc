@@ -27,7 +27,6 @@ function Result({ id }) {
 
   return (
     <div>
-      <h1>hii from result</h1>
       <div>{isLoading ? <p>loading ...</p> : processVidData()}</div>
     </div>
   );

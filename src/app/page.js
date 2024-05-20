@@ -3,7 +3,6 @@ import { useState } from "react";
 import Form from "@/components/Form";
 import Notice from "@/components/Notice";
 import Result from "@/components/Result";
-import handlePlayList from "./api/route";
 
 export default function Home() {
   const [playListId, setPlayListId] = useState(null);
@@ -11,8 +10,6 @@ export default function Home() {
   function handleId(id) {
     setPlayListId(id);
   }
-  // console.log("hii");
-  // console.log(handlePlayList(playListId));
 
   return (
     <main className="m-auto max-w-screen-lg">
