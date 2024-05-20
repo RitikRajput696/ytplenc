@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "humanize-duration": "^3.32.0",
+    "iso8601-duration": "^2.1.2",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18"
