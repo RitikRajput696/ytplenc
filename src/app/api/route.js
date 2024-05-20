@@ -20,15 +20,13 @@ export default function handlePlayList(playListId) {
       if (playListId === null) {
         return;
       }
-
+      // fetch all videoIDs of playlist videos
       setIsLoading(true);
       let response1 = await fetch(url1);
       let res1 = await response1.json();
       for (let i = 0; i < res1.items.length; ++i) {
         videoIdArr.push(res1.items[i].contentDetails.videoId);
       }
-
-      console.log(videoIdArr);
 
       // all playlist videos duration
 
