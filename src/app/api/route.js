@@ -1,52 +1,48 @@
 "use client";
-import { useState, useEffect } from "react";
 
-function handlePlaylist(playListId) {
-  const [data, setData] = useState([]);
-  const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
-  const maxResult = 50;
+import { useEffect, useState } from "react";
+
+export default function handlePlayList(playListId) {
+  const [vidData, setVidData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  let maxResult = 50;
+  let videoIdArr = [];
+  let videoDurationArr = [];
+  let apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
+
   let url1 =
     `https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=${maxResult}&playlistId=` +
     playListId +
     `&key=${apiKey}`;
+
   useEffect(() => {
-    getAllVideoIds();
+    async function fetchAllVideoIds() {
+      if (playListId === null) {
+        return;
+      }
+
+      setIsLoading(true);
+      let response1 = await fetch(url1);
+      let res1 = await response1.json();
+      for (let i = 0; i < res1.items.length; ++i) {
+        videoIdArr.push(res1.items[i].contentDetails.videoId);
+      }
+
+      console.log(videoIdArr);
+
+      // all playlist videos duration
+
+      for (let i = 0; i < videoIdArr.length; ++i) {
+        let url2 = `https://www.googleapis.com/youtube/v3/videos?&part=contentDetails&id=${videoIdArr[i]}&key=${apiKey}&fields=items/contentDetails/duration`;
+        let response2 = await fetch(url2);
+        let res2 = await response2.json();
+        videoDurationArr.push(res2.items[0].contentDetails.duration);
+      }
+      setVidData(videoDurationArr);
+      setIsLoading(false);
+    }
+    fetchAllVideoIds();
   }, [playListId]);
 
-  async function getAllVideoIds() {
-    if (playListId) {
-      let response = await fetch(url1);
-      response = await response.json();
-      setData(response.items);
-    } else {
-      console.log("playListId is not available");
-    }
-  }
-  let dataArr = [];
-  for (let i = 0; i < data.length; i++) {
-    dataArr.push(data[i].contentDetails.videoId);
-  }
-  return dataArr;
+  return [vidData, isLoading];
 }
-
-function getVidDuration(videoIdArr) {
-  let videoDurationArr = [];
-  const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
-
-  useEffect(() => {
-    fetchData();
-  }, [videoIdArr]);
-
-  async function fetchData() {
-    for (let i = 0; i < videoIdArr.length; ++i) {
-      let url2 = `https://www.googleapis.com/youtube/v3/videos?&part=contentDetails&id=${videoIdArr[i]}&key=${apiKey}&fields=items/contentDetails/duration`;
-      let res = await fetch(url2);
-      res = await res.json();
-      videoDurationArr.push(res.items[0].contentDetails.duration);
-    }
-  }
-
-  return videoDurationArr;
-}
-
-export { handlePlaylist, getVidDuration };

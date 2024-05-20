@@ -11,15 +11,17 @@ function Form({ id }) {
     e.preventDefault();
     if (formData == "") {
       alert("paste playlist link");
-    } else {
-      id(getPlaylistId(formData));
+      return;
     }
+    id(getPlaylistId(formData));
   }
 
   function getPlaylistId(url) {
-    const regex = /[?&]list=([a-zA-Z0-9_-]+)/;
-    const match = url.match(regex);
-    return match ? match[1] : null;
+    if (url != "") {
+      const regex = /[?&]list=([a-zA-Z0-9_-]+)/;
+      const match = url.match(regex);
+      return match ? match[1] : null;
+    }
   }
 
   return (
