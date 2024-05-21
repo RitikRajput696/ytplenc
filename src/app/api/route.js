@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 export default function handlePlayList(playListId) {
   const [vidData, setVidData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
   let maxResult = 50;
   let videoIdArr = [];
   let videoDurationArr = [];
