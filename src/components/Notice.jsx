@@ -2,7 +2,7 @@ import React from "react";
 
 function Notice() {
   return (
-    <div className="bg-green-2100 flex flex-col items-center justify-center rounded border-2 border-green-400 bg-green-100 p-12 text-green-900">
+    <div className="bg-green-2100 flex flex-col items-center justify-center rounded border-2 border-gray-950 bg-gray-800 p-12 text-white">
       <p>
         This application helps you to calculate total duration of a playlist.
       </p>

@@ -42,8 +42,8 @@ function Form({ id }) {
           onChange={handleChange}
         />
         <button
-          className="rounded-md border-2 border-green-400 bg-green-100
-        p-2 text-xl text-green-900"
+          className="rounded-md border-2 border-gray-950 bg-gray-800 p-2
+        text-xl text-white"
           type="submit"
         >
           Calculate
