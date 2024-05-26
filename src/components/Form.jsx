@@ -29,7 +29,7 @@ function Form({ id }) {
       <form
         onSubmit={handleSubmit}
         action=""
-        className="flex w-full max-w-4xl items-center justify-between gap-1"
+        className="flex w-full max-w-4xl flex-col items-center justify-between gap-1 sm:flex-row"
       >
         <label htmlFor="playlist-link" className="text-xl font-semibold">
           playlist_link
@@ -42,8 +42,8 @@ function Form({ id }) {
           onChange={handleChange}
         />
         <button
-          className="rounded-md border-2 border-orange-700 bg-orange-600 
-        p-2 text-xl text-white"
+          className="rounded-md border-2 border-green-400 bg-green-100
+        p-2 text-xl text-green-900"
           type="submit"
         >
           Calculate

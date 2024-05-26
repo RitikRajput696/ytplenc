@@ -12,7 +12,7 @@ export default function Home() {
   }
 
   return (
-    <main className="m-auto max-w-screen-lg">
+    <main className="m-auto p-1 sm:max-w-screen-lg">
       <Form id={handleId} />
       <Notice />
       <Result id={playListId} />
